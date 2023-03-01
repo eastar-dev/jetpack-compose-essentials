@@ -12,8 +12,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.eastar.composestate.ui.theme.ComposeStateTheme
@@ -47,11 +49,11 @@ fun MyTextField() {
     //TextField(value = textState.value, onValueChange = onTextChange)
 
     //01
-    //var textState by remember { mutableStateOf("") }
-    //val onTextChange = { test: String ->
-    //    textState = test
-    //}
-    //TextField(value = textState, onValueChange = onTextChange)
+    var textState by remember { mutableStateOf("") }
+    val onTextChange = { test: String ->
+        textState = test
+    }
+    TextField(value = textState, onValueChange = onTextChange)
 
     //02
     //var (textValue, setText) = remember { mutableStateOf("") }
@@ -61,8 +63,8 @@ fun MyTextField() {
     //TextField(value = textValue, onValueChange = onTextChange)
 
     //03
-    val (text, onTextChange) = remember { mutableStateOf("") }
-    TextField(value = text, onValueChange = onTextChange)
+    //val (text, onTextChange) = remember { mutableStateOf("") }
+    //TextField(value = text, onValueChange = onTextChange)
 }
 
 //@Preview(showBackground = true)
