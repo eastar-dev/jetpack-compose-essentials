@@ -3,6 +3,7 @@
 package dev.eastar.composestate
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.log.Log
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,6 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DemoScreen() {
     MyTextField()
+    FunctionsA()
 }
 
 @Composable
@@ -67,11 +70,33 @@ fun MyTextField() {
     //TextField(value = text, onValueChange = onTextChange)
 }
 
+@Composable
+fun FunctionsA() {
+    Log.e("FunctionsA")
+    var switchState by remember { mutableStateOf(true) }
+    Log.e("FunctionsA")
+    val onSwitchChange = { checked: Boolean ->
+        Log.e("FunctionsA")
+        switchState = checked
+    }
+    Log.e("FunctionsA",onSwitchChange.hashCode())
+    FunctionsB(
+        switchState, onSwitchChange
+    )
+}
+
+@Composable
+fun FunctionsB(switchState: Boolean, onSwitchChange: (Boolean) -> Unit) {
+    Log.e("FunctionsA", onSwitchChange.hashCode())
+    Switch(checked = switchState, onCheckedChange = onSwitchChange)
+}
+
 //@Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     ComposeStateTheme {
         DemoScreen()
+        FunctionsA()
     }
 }
