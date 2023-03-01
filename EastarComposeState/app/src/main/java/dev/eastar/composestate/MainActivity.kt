@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,12 +39,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DemoScreen() {
-    MyTextField()
-    FunctionsA()
+    var textState by rememberSaveable { mutableStateOf("") }
+    val onTextChange = { test: String ->
+        textState = test
+    }
+
+    MyTextField(textState ,onTextChange)
+    //FunctionsA()
 }
 
 @Composable
-fun MyTextField() {
+fun MyTextField(textState: String, onTextChange: (String) -> Unit) {
     //00
     //val textState = remember { mutableStateOf("") }
     //val onTextChange = { test: String ->
@@ -52,10 +58,7 @@ fun MyTextField() {
     //TextField(value = textState.value, onValueChange = onTextChange)
 
     //01
-    var textState by remember { mutableStateOf("") }
-    val onTextChange = { test: String ->
-        textState = test
-    }
+
     TextField(value = textState, onValueChange = onTextChange)
 
     //02
