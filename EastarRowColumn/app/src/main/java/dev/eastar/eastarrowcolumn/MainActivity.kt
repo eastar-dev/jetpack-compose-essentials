@@ -3,6 +3,7 @@ package dev.eastar.eastarrowcolumn
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,17 +33,28 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    Column {
-        Row {
-            TextCell("1")
-            TextCell("2")
-            TextCell("3")
-        }
 
-        Column() {
-            TextCell("1", borderColor = Color.Green)
-            TextCell("2", borderColor = Color.Green)
-            TextCell("3", borderColor = Color.Green)
+    Column(Modifier.background(Color(0x55ff0000))) {
+        Row(Modifier.background(Color(0x55ff0000))) {
+            Column(Modifier.background(Color(0x55ff0000))) {
+                TextCell("1", modifier = Modifier.background(Color(0x55ffff00)))
+                TextCell("2")
+                TextCell("3")
+            }
+            Column {
+                TextCell("4")
+                TextCell("5")
+                TextCell("6")
+            }
+            Column {
+                TextCell("7")
+                TextCell("8")
+            }
+        }
+        Row {
+            TextCell("9")
+            TextCell("10")
+            TextCell("11")
         }
     }
 }
