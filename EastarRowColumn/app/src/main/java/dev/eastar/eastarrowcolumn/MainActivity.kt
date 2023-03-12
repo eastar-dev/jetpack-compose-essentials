@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EastarRowColumnTheme {
-                MainScreen()
+                TextRow2()
             }
         }
     }
@@ -72,6 +73,24 @@ fun TextRow() {
         )
     }
 }
+@Composable
+fun TextRow2() {
+    Row {
+        Text(
+            text = "1stLine 한글이면 어떻까?\n2stLint 이것이 한글이면",
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.alignBy(FirstBaseline)
+        )
+
+        Text(
+            text = "Small text",
+            fontSize = 30.sp,
+            modifier = Modifier.alignByBaseline(),
+            fontWeight = FontWeight.Bold,
+        )
+    }
+}
 
 @Composable
 fun TextCell(text: String, modifier: Modifier = Modifier, borderColor: Color = Color.Red) {
@@ -89,6 +108,13 @@ fun TextCell(text: String, modifier: Modifier = Modifier, borderColor: Color = C
     )
 }
 
+@Preview(device = Devices.AUTOMOTIVE_1024p, widthDp = 720, heightDp = 360)
+@Composable
+fun DefaultPreview4() {
+    EastarRowColumnTheme {
+        TextRow2()
+    }
+}
 @Preview(device = Devices.AUTOMOTIVE_1024p, widthDp = 720, heightDp = 360)
 @Composable
 fun DefaultPreview3() {
