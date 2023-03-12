@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,7 +45,31 @@ fun MainScreen() {
     ) {
         TextCell("9", Modifier.align(Alignment.Start))
         TextCell("10", Modifier.weight(0.5f, false), Color.Blue)
-        TextCell("11", Modifier.weight(0.5f, true).align(Alignment.End))
+        TextCell(
+            "11",
+            Modifier
+                .weight(0.5f, true)
+                .align(Alignment.End)
+        )
+    }
+}
+
+@Composable
+fun TextRow() {
+    Row {
+        Text(
+            modifier = Modifier.alignByBaseline(),
+            text = "Large Test",
+            fontSize = 70.sp,
+            fontWeight = FontWeight.Bold,
+        )
+
+        Text(
+            text = "Small text",
+            fontSize = 30.sp,
+            modifier = Modifier.alignByBaseline(),
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 
@@ -61,6 +87,14 @@ fun TextCell(text: String, modifier: Modifier = Modifier, borderColor: Color = C
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center
     )
+}
+
+@Preview(device = Devices.AUTOMOTIVE_1024p, widthDp = 720, heightDp = 360)
+@Composable
+fun DefaultPreview3() {
+    EastarRowColumnTheme {
+        TextRow()
+    }
 }
 
 @Preview(showBackground = true)
