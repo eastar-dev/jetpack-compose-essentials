@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,20 +32,28 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    Row {
-        TextCell("1")
-        TextCell("2")
-        TextCell("3")
+    Column {
+        Row {
+            TextCell("1")
+            TextCell("2")
+            TextCell("3")
+        }
+
+        Column() {
+            TextCell("1", borderColor = Color.Green)
+            TextCell("2", borderColor = Color.Green)
+            TextCell("3", borderColor = Color.Green)
+        }
     }
 }
 
 @Composable
-fun TextCell(text: String, modifier: Modifier = Modifier) {
+fun TextCell(text: String, modifier: Modifier = Modifier, borderColor: Color = Color.Red) {
 
     val cellModifier = Modifier
         .padding(4.dp)
         .size(100.dp, 100.dp)
-        .border(width = 4.dp, color = Color.Red)
+        .border(width = 4.dp, color = borderColor)
 
     Text(
         text = text, cellModifier.then(modifier),
