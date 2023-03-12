@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -33,29 +32,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-
-    Column(Modifier.background(Color(0x55ff0000))) {
-        Row(Modifier.background(Color(0x55ff0000))) {
-            Column(Modifier.background(Color(0x55ff0000))) {
-                TextCell("1", modifier = Modifier.background(Color(0x55ffff00)))
-                TextCell("2")
-                TextCell("3")
-            }
-            Column {
-                TextCell("4")
-                TextCell("5")
-                TextCell("6")
-            }
-            Column {
-                TextCell("7")
-                TextCell("8")
-            }
-        }
-        Row {
-            TextCell("9")
-            TextCell("10")
-            TextCell("11")
-        }
+    Row(
+        horizontalArrangement = androidx.compose.foundation.layout.Arrangement.End,
+        verticalAlignment = androidx.compose.ui.Alignment.Top,
+        modifier = Modifier
+            .size(width = 400.dp, height = 200.dp)
+            .background(Color(0x55ff0000))
+    ) {
+        TextCell("9")
+        TextCell("10")
+        TextCell("11")
     }
 }
 
@@ -73,6 +59,14 @@ fun TextCell(text: String, modifier: Modifier = Modifier, borderColor: Color = C
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview2() {
+    EastarRowColumnTheme {
+        MainScreen()
+    }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
