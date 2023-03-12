@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -86,7 +87,7 @@ fun TextRow2() {
         Text(
             text = "Small text",
             fontSize = 30.sp,
-            modifier = Modifier.alignByBaseline(),
+            modifier = Modifier.paddingFrom(alignmentLine = FirstBaseline ,before = 140.dp , after = 0.dp),
             fontWeight = FontWeight.Bold,
         )
     }
