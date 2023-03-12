@@ -5,11 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -32,16 +34,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    Row(
-        horizontalArrangement = androidx.compose.foundation.layout.Arrangement.End,
-        verticalAlignment = androidx.compose.ui.Alignment.Top,
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom,
         modifier = Modifier
-            .size(width = 400.dp, height = 200.dp)
+            .size(width = 250.dp, height = 500.dp)
             .background(Color(0x55ff0000))
     ) {
-        TextCell("9")
-        TextCell("10")
-        TextCell("11")
+        TextCell("9", Modifier.align(Alignment.Start))
+        TextCell("10", Modifier.weight(0.5f, false), Color.Blue)
+        TextCell("11", Modifier.weight(0.5f, true).align(Alignment.End))
     }
 }
 
