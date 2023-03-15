@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.eastar.Log
 import dev.eastar.customlayout.ui.theme.EastarCustomLayoutTheme
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ fun MainScreen() {
     Box(modifier = Modifier.size(120.dp, 80.dp)) {
         ColorBox(
             Modifier
-                .exampleLayout(90,50)
+                .exampleLayout(-1.0f)
                 .background(Color.Blue)
         )
     }
@@ -56,13 +56,14 @@ fun ColorBox(modifier: Modifier = Modifier.size(120.dp, 80.dp)) {
 }
 
 fun Modifier.exampleLayout(
-    x: Int,
-    y: Int,
+    fraction: Float
 ) = layout { measurable, constraints ->
-Log.e(x,y)
     val placeable = measurable.measure(constraints)
+
+    val x = -(placeable.width * fraction).roundToInt()
+
     layout(placeable.width, placeable.height) {
-        placeable.placeRelative(x, y)
+        placeable.placeRelative(x = x, y = 0)
     }
 }
 
