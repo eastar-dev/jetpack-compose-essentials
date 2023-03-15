@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,11 +37,34 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     Box(modifier = Modifier.size(120.dp, 80.dp)) {
-        ColorBox(
-            Modifier
-                .exampleLayout(-1.0f)
-                .background(Color.Blue)
-        )
+        Column{
+            ColorBox(
+                Modifier
+                    .exampleLayout(0f)
+                    .background(Color.Blue)
+            )
+            ColorBox(
+                Modifier
+                    .exampleLayout(0.25f)
+                    .background(Color.Blue)
+            )
+            ColorBox(
+                Modifier
+                    .exampleLayout(0.5f)
+                    .background(Color.Blue)
+            )
+            ColorBox(
+                Modifier
+                    .exampleLayout(0.75f)
+                    .background(Color.Blue)
+            )
+            ColorBox(
+                Modifier
+                    .exampleLayout(1f)
+                    .background(Color.Blue)
+            )
+        }
+
     }
 
 }
@@ -60,7 +84,7 @@ fun Modifier.exampleLayout(
 ) = layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)
 
-    val x = -(placeable.width * fraction).roundToInt()
+    val x = (placeable.width * fraction).roundToInt()
 
     layout(placeable.width, placeable.height) {
         placeable.placeRelative(x = x, y = 0)
