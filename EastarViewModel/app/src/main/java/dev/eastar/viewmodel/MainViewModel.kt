@@ -24,6 +24,10 @@ class MainViewModel : ViewModel() {
         }.getOrDefault("Invalid Entry")
     }
 
+    fun switchTemp() {
+        isFahrenheit = !isFahrenheit
+    }
+
     private fun celsiusToFahrenheit(tempInt: Int): String {
         return ((tempInt * 1.8) + 32).roundToInt().toString()
     }
