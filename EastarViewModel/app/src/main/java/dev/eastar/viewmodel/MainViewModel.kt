@@ -1,5 +1,6 @@
 package dev.eastar.viewmodel
 
+import android.log.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,11 +10,11 @@ import kotlin.math.roundToInt
 class MainViewModel : ViewModel() {
 
     var isFahrenheit by mutableStateOf(true)
-    var result by mutableStateOf("")
+    var convertedTemperature by mutableStateOf("")
 
 
-    fun convertTemp(temp: String) {
-        result = kotlin.runCatching {
+    fun convertTemperature(temp: String) {
+        convertedTemperature = kotlin.runCatching {
             val tempInt = temp.toInt()
 
             if (isFahrenheit) {
@@ -24,7 +25,8 @@ class MainViewModel : ViewModel() {
         }.getOrDefault("Invalid Entry")
     }
 
-    fun switchTemp() {
+    fun switchTemperatureType() {
+        Log.e("switchTemperatureType",isFahrenheit)
         isFahrenheit = !isFahrenheit
     }
 
