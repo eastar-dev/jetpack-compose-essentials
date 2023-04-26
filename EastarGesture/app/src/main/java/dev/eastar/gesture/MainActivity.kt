@@ -89,21 +89,91 @@ fun MainScreen(initScreenState: Int = InitTest) {
                 DrawDemo()
                 PointerInputDrag()
             }
-
             1 -> ScrollableModifierDemo()
-
-
-            2 ->
-                ScrollModifierDemo()
-
-
-            3 ->
-                MultiTouchDemo()
-
-
+            2 -> ScrollModifierDemo()
+            3 -> MultiTouchDemo()
+            //4 -> SwipeableScreen()
         }
     }
 }
+
+
+//@Composable
+//fun SwipeableScreen() {
+//    val parentBoxWidth = 320.dp
+//    val childBoxSides = 30.dp
+//
+//    val swipeableState = rememberSwipeableState("L")
+//    val widthPx = with(LocalDensity.current) {
+//        (parentBoxWidth - childBoxSides).toPx()
+//    }
+//
+//    val anchors = mapOf(0f to "L", widthPx / 2 to "C", widthPx to "R")
+//
+//    Box {
+//        Box(
+//            modifier = Modifier
+//                .padding(20.dp)
+//                .width(parentBoxWidth)
+//                .height(childBoxSides)
+//                .swipeable(
+//                    state = swipeableState,
+//                    anchors = anchors,
+//                    thresholds = { _, _ -> FractionalThreshold(0.5f) },
+//                    orientation = Orientation.Horizontal
+//                )
+//        ) {
+//            Box(
+//                Modifier
+//                    .fillMaxWidth()
+//                    .height(5.dp)
+//                    .background(Color.DarkGray)
+//                    .align(Alignment.CenterStart)
+//            )
+//            Box(
+//                Modifier
+//                    .size(10.dp)
+//                    .background(
+//                        Color.DarkGray,
+//                        shape = CircleShape
+//                    )
+//                    .align(Alignment.CenterStart)
+//            )
+//            Box(
+//                Modifier
+//                    .size(10.dp)
+//                    .background(
+//                        Color.DarkGray,
+//                        shape = CircleShape
+//                    )
+//                    .align(Alignment.Center)
+//            )
+//            Box(
+//                Modifier
+//                    .size(10.dp)
+//                    .background(
+//                        Color.DarkGray,
+//                        shape = CircleShape
+//                    )
+//                    .align(Alignment.CenterEnd)
+//            )
+//
+//            Box(
+//                Modifier
+//                    .offset { IntOffset(swipeableState.offset.value.roundToInt(), 0) }
+//                    .size(childBoxSides)
+//                    .background(Color.Blue),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                Text(
+//                    swipeableState.currentValue,
+//                    color = Color.White,
+//                    fontSize = 22.sp
+//                )
+//            }
+//        }
+//    }
+//}
 
 
 @Composable
