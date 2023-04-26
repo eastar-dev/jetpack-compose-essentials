@@ -14,7 +14,9 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.imageResource
@@ -65,13 +68,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+const val InitTest = 3
+const val TestSize = 4
+
 @Composable
-fun MainScreen(initScreenState: Int = 3, modifier: Modifier = Modifier) {
+fun MainScreen(initScreenState: Int = InitTest) {
     var screenState by remember { mutableStateOf(initScreenState) }
     Row {
         Column {
             ClickZoneChake()
-            Button(onClick = { screenState = (screenState + 1) % 3 }) {
+            Button(onClick = { screenState = (screenState + 1) % TestSize }) {
                 Text(text = "$screenState")
             }
         }
@@ -84,20 +90,53 @@ fun MainScreen(initScreenState: Int = 3, modifier: Modifier = Modifier) {
                 PointerInputDrag()
             }
 
-            1 -> Column {
-                ScrollableModifierDemo()
-            }
+            1 -> ScrollableModifierDemo()
 
-            2 -> Column {
+
+            2 ->
                 ScrollModifierDemo()
-            }
 
-            3 -> Column {
-                MultiTou()
-            }
+
+            3 ->
+                MultiTouchDemo()
+
+
         }
     }
 }
+
+
+@Composable
+fun MultiTouchDemo() {
+
+    var scale by remember { mutableStateOf(1f) }
+    var angle by remember { mutableStateOf(0f) }
+    var offset by remember { mutableStateOf(Offset.Zero) }
+
+    val state = rememberTransformableState { scaleChange, offsetChange, rotationChange ->
+        scale *= scaleChange
+        angle += rotationChange
+        offset += offsetChange
+    }
+
+    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+        Box(
+            Modifier
+                .graphicsLayer(
+                    scaleX = scale,
+                    scaleY = scale,
+                    rotationZ = angle,
+                    translationX = offset.x,
+                    translationY = offset.y
+
+                )
+                .transformable(state = state)
+                .background(Color.Blue)
+                .size(100.dp)
+        )
+    }
+}
+
 
 @Composable
 fun ScrollModifierDemo() {

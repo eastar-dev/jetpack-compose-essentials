@@ -151,27 +151,6 @@ fun PointerInputDrag() {
     }
 }
 
-@Composable
-fun DragDemo() {
-
-    Box(modifier = Modifier.fillMaxSize()) {
-
-        var xOffset by remember { mutableStateOf(0f) }
-
-        Box(
-            modifier = Modifier
-                .offset { IntOffset(xOffset.roundToInt(), 0) }
-                .size(100.dp)
-                .background(Color.Blue)
-                .draggable(
-                    orientation = Orientation.Horizontal,
-                    state = rememberDraggableState { distance ->
-                        xOffset += distance
-                    }
-                )
-        )
-    }
-}
 
 @Composable
 fun TapPressDemo() {
