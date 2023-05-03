@@ -381,9 +381,13 @@ object Log {
         return out.toString()
     }
 
+
     private fun _DUMP(bundle: Bundle?): String {
         bundle ?: return "null_Bundle"
-        return bundle.keySet().joinToString("\n") { "${it.padEnd(20)}, ${bundle.get(it)}, ${bundle.get(it)?.javaClass?.simpleName ?: "NULL"}" }
+        return bundle.keySet().joinToString("\n") {
+            @Suppress("DEPRECATION")
+            "${it.padEnd(20)}, ${bundle.get(it)}, ${bundle.get(it)?.javaClass?.simpleName ?: "NULL"}"
+        }
     }
 
     private fun _DUMP(cls: Class<*>?): String {
@@ -846,6 +850,7 @@ fun SavedStateHandle._DUMP() {
 fun Bundle._DUMP() {
     Log.ps(Log.ERROR, stack, "=".repeat(50))
     keySet().map {
+        @Suppress("DEPRECATION")
         it to get(it)
     }.forEach { (key, value) ->
         Log.ps(Log.WARN, stack, key, value, value?.javaClass?.simpleName)
